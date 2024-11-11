@@ -1,0 +1,41 @@
+$(document).ready(function() {
+    
+    let circles = document.querySelectorAll(".circle");
+
+    // iniciando o loader quando o usuário chegar na section
+    let dataAreaOffset = $("#data-area").offset();
+    
+    circles.forEach(circle => {
+        circle = new ProgressBar.Circle(circle, {
+            color: '#64DAF9',
+            strokeWidth: 8,
+            duration: 1400,
+            from: { color: "#AAA" },
+            to: { color: "#65DAF9" },
+    
+            step: function (state, circle) {
+                circle.path.setAttribute("stroke", state.color);
+    
+                let value  = Math.round(circle.value() * circle._container.dataset.value);
+    
+                circle.setText(value);
+            }
+            
+        });
+        
+        $(window).scroll(function(e) {
+            let scroll = $(window).scrollTop();
+    
+            if (scroll > (dataAreaOffset.top - 800)) {
+                circle.animate(1.0);
+            }
+        });
+    });
+
+    // Parallax
+    setTimeout(function() {
+        $("#data-area").parallax({imageSrc: "img/cidadeparallax.png"})
+    }, 250);
+
+
+});
