@@ -47,15 +47,9 @@ $(document).ready(function() {
         $(".main-btn").removeClass("active");
         $(this).addClass("active");
 
-        if (type == "dsg-btn"){
-            eachBoxes('dsg', boxes);
-        } else if (type == "dev-btn") {
-            eachBoxes("dev", boxes);
-        } else if (type == "seo-btn") {
-            eachBoxes("seo", boxes);
-        } else {
-            eachBoxes("all", boxes);
-        }
+        type = type.replaceAll("btn", "").replaceAll("-", "");
+        
+        eachBoxes(type, boxes);
     });
 
     function eachBoxes(type, boxes) {
